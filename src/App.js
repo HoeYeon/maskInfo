@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Main from "./Main";
-import GetLoc from "./Getloc";
-
+import Map from "./Map";
 function App() {
   return (
     <span role="img" aria-label="corona">
       😷🤧😷😷😷
       <Main></Main>
-      <GetLoc></GetLoc>
+      <div id="map" style={{ width: "100vw", height: "60vh" }} />
+      <Map></Map>
     </span>
   );
 }

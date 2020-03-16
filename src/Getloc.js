@@ -11,12 +11,7 @@ const GetLoc = () => {
   };
   tmp();
   console.log(lat, long);
-  return (
-    <div>
-      {lat}
-      {long}
-    </div>
-  );
+  return [lat, long];
 };
 
 export default GetLoc;
