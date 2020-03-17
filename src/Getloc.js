@@ -1,17 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
-const GetLoc = () => {
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
-  const tmp = () => {
-    navigator.geolocation.getCurrentPosition(position => {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    });
-  };
-  tmp();
-  console.log(lat, long);
-  return [lat, long];
+const GetPosition = () => {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
 };
 
-export default GetLoc;
+export default GetPosition;
