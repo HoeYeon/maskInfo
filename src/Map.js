@@ -31,7 +31,7 @@ const SetMap = () => {
       CreateInfo(map, lat, lng, { name, remain_stat, stock_at });
     });
 
-    map.setCenter(map);
+    map.setCenter(options.center);
   };
   tmp();
 
