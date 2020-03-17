@@ -20,12 +20,12 @@ export const maskInfo = {
         perPage: 500
       }
     }),
-  storesByGeo: () =>
+  storesByGeo: (lat, lng) =>
     api.get("/storesByGeo/json", {
       params: {
-        lat: 33.0,
-        lng: 124.0,
-        m: 5000
+        lat: lat,
+        lng: lng,
+        m: 1500
       }
     }),
   storesByAddr: () =>
