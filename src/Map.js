@@ -26,7 +26,7 @@ const SetMap = () => {
       data: { stores }
     } = await maskInfo.storesByGeo(latitude, longitude);
     console.log(stores);
-    stores.map(data => {
+    await stores.map(data => {
       const { lat, lng, name, remain_stat, stock_at } = data;
       CreateInfo(map, lat, lng, { name, remain_stat, stock_at });
     });
