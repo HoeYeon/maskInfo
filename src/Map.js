@@ -20,7 +20,6 @@ const SetMap = () => {
       marker = new window.kakao.maps.Marker({
         position: markerPosition
       });
-    marker.setMap(map);
     const {
       data: { stores }
     } = await maskInfo.storesByGeo(latitude, longitude);
@@ -34,6 +33,7 @@ const SetMap = () => {
     //   stock_at: "100",
     //   remain_stat: "0"
     // });
+    marker.setMap(map);
   };
   tmp();
 
