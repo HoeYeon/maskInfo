@@ -7,7 +7,7 @@
 - [x] Longitude Latitude
 - [x] Map Api
 - [x] Update loc on the map
-- [ ] add Mark
+- [x] add Mark
 - [ ] Show mask on the Map
 
 ### Api
