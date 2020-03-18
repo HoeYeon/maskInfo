@@ -4,10 +4,34 @@ export const CreateInfo = (
   longitude,
   { name, stock_at, remain_stat }
 ) => {
+  const color =
+    remain_stat === "plenty"
+      ? "#2ecc71"
+      : remain_stat === "some"
+      ? "#f1c40f"
+      : remain_stat === "few"
+      ? "#c0392b"
+      : remain_stat === "empty"
+      ? "#95a5a6"
+      : "#2c3e50";
   const content = `
-      <div style="padding:5px; font-size:12px"><strong>${name}</strong><br>  ${stock_at}<br>${remain_stat}</a></div>
+      <div style="padding:5px; font-size:12px"><strong>${name}</strong>&nbsp
+      <span style = "color:${color}">
+      ${
+        remain_stat === "plenty"
+          ? "100+"
+          : remain_stat === "some"
+          ? "30~100"
+          : remain_stat === "few"
+          ? "2~30"
+          : remain_stat === "empty"
+          ? "재고없음"
+          : "판매중지"
+      }</span><br>
+      입고시간: ${stock_at}
+      </div>
       `;
-  const iwRemoveable = true,
+  const iwRemoveable = false,
     iwPosition = new window.daum.maps.LatLng(latitude, longitude);
 
   // create info Window
