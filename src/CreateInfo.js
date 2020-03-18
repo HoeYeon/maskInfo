@@ -15,7 +15,7 @@ export const CreateInfo = (
       ? "#95a5a6"
       : "#2c3e50";
   const content = `
-      <div style="padding:5px; font-size:12px"><strong>${name}</strong>&nbsp
+      <div style="padding:5px; font-size:10px"><strong>${name}</strong>&nbsp
       <span style = "color:${color}">
       ${
         remain_stat === "plenty"
@@ -28,7 +28,7 @@ export const CreateInfo = (
           ? "재고없음"
           : "판매중지"
       }</span><br>
-      입고시간: ${stock_at}
+      입고예정: ${stock_at.slice(5, stock_at.length)}
       </div>
       `;
   const iwRemoveable = false,
