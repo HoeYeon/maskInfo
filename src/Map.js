@@ -3,6 +3,22 @@ import GetPosition from "./Getloc";
 import { CreateInfo } from "./CreateInfo";
 import { maskInfo } from "./api";
 import Display from "./DisplayStore";
+import styled from "styled-components";
+
+const Wrap = styled.div`
+  position: fixed;
+  top: 460px;
+  width: 90vw;
+  overflow: auto;
+  height: 26%;
+  padding-left: 10px;
+`;
+const Column = styled.div`
+  padding-left: 10px;
+  display: grid;
+  grid-template-columns: 170px 150px 100px;
+  font-weight: bold;
+`;
 
 const SetMap = () => {
   const [stores, setStore] = useState([]);
@@ -44,14 +60,21 @@ const SetMap = () => {
 
   return (
     <>
-      {stores.map(data => (
-        <Display
-          key={data.name}
-          name={data.name}
-          remain_stat={data.remain_stat}
-          stock_at={data.stock_at}
-        ></Display>
-      ))}
+      <Column>
+        <div>약국명칭</div>
+        <div>입고시간</div>
+        <div>재고현황</div>
+      </Column>
+      <Wrap>
+        {stores.map(data => (
+          <Display
+            key={data.name}
+            name={data.name}
+            remain_stat={data.remain_stat}
+            stock_at={data.stock_at}
+          ></Display>
+        ))}
+      </Wrap>
     </>
   );
 };

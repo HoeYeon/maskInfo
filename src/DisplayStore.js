@@ -4,9 +4,13 @@ import styled from "styled-components";
 const StoreList = styled.div`
   justify-content: left;
   font-size: 18px;
+  display: grid;
+  grid-template-columns: 170px 150px 100px;
+  padding-bottom: 5px;
 `;
 
 const Store = styled.div``;
+const Stock = styled.div``;
 const Remain = styled.div`
   color: ${props =>
     props.remain_stat === "plenty"
@@ -23,9 +27,8 @@ const Remain = styled.div`
 export default ({ name, remain_stat, stock_at }) => {
   return (
     <StoreList>
-      <Store>
-        {name} {stock_at ? stock_at.slice(5, stock_at.length)+ "\n" : " (미정)" + "\n"}
-      </Store>
+      <Store>{name}</Store>
+      <Stock>{stock_at ? stock_at.slice(5, stock_at.length) : " (미정)"}</Stock>
       <Remain remain_stat={remain_stat}>
         {remain_stat === "plenty"
           ? "100+"
