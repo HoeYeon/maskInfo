@@ -10,7 +10,6 @@ const Wrap = styled.div`
 `;
 const DisplayList = styled.div`
   position: fixed;
-  top: 460px;
   width: 90vw;
   overflow: auto;
   height: 26%;
@@ -18,6 +17,7 @@ const DisplayList = styled.div`
 `;
 const Column = styled.div`
   padding-left: 10px;
+  padding-bottom: 5px;
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   font-weight: bold;
@@ -62,7 +62,7 @@ const SetMap = () => {
   console.log(stores);
 
   return (
-    <>
+    <div>
       <Column>
         <div>약국명칭</div>
         <div>입고시간</div>
@@ -80,7 +80,7 @@ const SetMap = () => {
           ))}
         </DisplayList>
       </Wrap>
-    </>
+    </div>
   );
 };
 
