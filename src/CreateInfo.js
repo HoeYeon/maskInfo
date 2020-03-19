@@ -14,9 +14,10 @@ export const CreateInfo = (
       : remain_stat === "empty"
       ? "#95a5a6"
       : "#2c3e50";
+      
   const content = `
-      <div style="padding:5px; font-size:10px"><strong>${name}</strong>&nbsp
-      <span style = "color:${color}">
+      <div style="padding:5px; font-size:10px; background-color:#ffffff"><strong>${name}</strong>&nbsp
+      <span style = "color:${color}"><br>
       ${
         remain_stat === "plenty"
           ? "100+"
@@ -27,18 +28,18 @@ export const CreateInfo = (
           : remain_stat === "empty"
           ? "재고없음"
           : "판매중지"
-      }</span><br>
-      입고예정: ${stock_at.slice(5, stock_at.length)}
+      }</span>
       </div>
       `;
   const iwRemoveable = false,
     iwPosition = new window.daum.maps.LatLng(latitude, longitude);
 
   // create info Window
-  const infowindow = new window.daum.maps.InfoWindow({
+  const infowindow = new window.kakao.maps.CustomOverlay({
+    map:map,
     position: iwPosition,
     content: content,
     removable: iwRemoveable
   });
-  infowindow.open(map);
+  //infowindow.open(map);
 };

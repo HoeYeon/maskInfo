@@ -19,7 +19,7 @@ const SetMap = () => {
         };
       const map = new window.kakao.maps.Map(container, options),
         // show Current Location
-        markerPosition = new window.daum.maps.LatLng(latitude, longitude),
+        markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
         marker = new window.kakao.maps.Marker({
           position: markerPosition
         });

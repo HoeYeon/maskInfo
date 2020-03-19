@@ -24,7 +24,7 @@ export default ({ name, remain_stat, stock_at }) => {
   return (
     <StoreList>
       <Store>
-        {name} {stock_at + "\n"}
+        {name} {stock_at ? stock_at.slice(5, stock_at.length)+ "\n" : " (미정)" + "\n"}
       </Store>
       <Remain remain_stat={remain_stat}>
         {remain_stat === "plenty"
