@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StoreList = styled.div`
   justify-content: left;
-  font-size: 18px;
+  font-size: 14px;
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   padding-bottom: 5px;
