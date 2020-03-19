@@ -6,6 +6,9 @@ import Display from "./DisplayStore";
 import styled from "styled-components";
 
 const Wrap = styled.div`
+  position: relative;
+`;
+const DisplayList = styled.div`
   position: fixed;
   top: 460px;
   width: 90vw;
@@ -16,7 +19,7 @@ const Wrap = styled.div`
 const Column = styled.div`
   padding-left: 10px;
   display: grid;
-  grid-template-columns: 170px 150px 100px;
+  grid-template-columns: 2fr 2fr 1fr;
   font-weight: bold;
 `;
 
@@ -66,14 +69,16 @@ const SetMap = () => {
         <div>재고현황</div>
       </Column>
       <Wrap>
-        {stores.map(data => (
-          <Display
-            key={data.name}
-            name={data.name}
-            remain_stat={data.remain_stat}
-            stock_at={data.stock_at}
-          ></Display>
-        ))}
+        <DisplayList>
+          {stores.map(data => (
+            <Display
+              key={data.name}
+              name={data.name}
+              remain_stat={data.remain_stat}
+              stock_at={data.stock_at}
+            ></Display>
+          ))}
+        </DisplayList>
       </Wrap>
     </>
   );

@@ -5,7 +5,7 @@ const StoreList = styled.div`
   justify-content: left;
   font-size: 18px;
   display: grid;
-  grid-template-columns: 170px 150px 100px;
+  grid-template-columns: 2fr 2fr 1fr;
   padding-bottom: 5px;
 `;
 
