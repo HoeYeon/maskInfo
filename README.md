@@ -1,6 +1,6 @@
-## Let's Get some mask!
+## 공적 마스크 알리미
 
-### coroan mask alarm
+### 근처 약국, 재고현황, 입고시간 등 정보를 제공
 
 Here is [Demo](https://pensive-agnesi-4c07cc.netlify.com/) (Mobile Recommended!!)
 
