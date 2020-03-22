@@ -3,8 +3,8 @@ import Map from "./Map";
 function App() {
   return (
     <>
-      <span role="img" aria-label="corona">
-        😷🤧😷😷😷
+      <span role="img" aria-label="corona" style={{ paddingLeft: "6px" }}>
+        😷🤧😷🤧😷
       </span>
       <div
         id="map"

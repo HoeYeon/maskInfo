@@ -33,6 +33,7 @@ const Toolbar = styled.button`
   font-weight: bold;
   background-color: ${props => (props.isStock ? "#ffeaa7" : "#ffffff")};
   border-radius: 15px;
+  outline: none;
 `;
 const Updated = styled.div`
   position: fixed;
