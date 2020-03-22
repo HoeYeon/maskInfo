@@ -3,6 +3,7 @@ import GetPosition from "./Getloc";
 import { CreateInfo } from "./CreateInfo";
 import { maskInfo } from "./api";
 import Display from "./DisplayStore";
+import { Filter } from "./Filter";
 import styled from "styled-components";
 
 const Wrap = styled.div`
@@ -22,64 +23,100 @@ const Column = styled.div`
   grid-template-columns: 2fr 2fr 1fr;
   font-weight: bold;
 `;
-
+const Toolbar = styled.button`
+  position: fixed;
+  z-index: 9999;
+  right: 50px;
+  bottom: 270px;
+  padding: 5px 7px 5px 7px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: ${props => (props.isStock ? "#ffeaa7" : "#dfe6e9")};
+`;
+const storeMarkers = [];
 const SetMap = () => {
   const [map, setMymap] = useState(null);
   const [stores, setStore] = useState(null);
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+  const [isStock, setStock] = useState(false);
 
-  // 위치정보 불러오기
+  // Set Loc & get Drug
   useEffect(() => {
     const init = async () => {
       const {
         coords: { latitude, longitude }
       } = await GetPosition();
       setPosition({ latitude, longitude });
+      let {
+        data: { stores }
+      } = await maskInfo.storesByGeo(latitude, longitude);
+      setStore(stores);
     };
     init();
   }, []);
 
+  //set Map
   useEffect(() => {
-    const init2 = async () => {
-      const { latitude, longitude } = position;
-      let container = document.getElementById("map"),
-        options = {
-          center: new window.kakao.maps.LatLng(latitude, longitude),
-          level: 3
-        };
-      const map = new window.kakao.maps.Map(container, options);
-      setMymap(map);
-
-      // show Current Location
-      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
-        marker = new window.kakao.maps.Marker({
-          position: markerPosition
-        });
-      marker.setMap(map);
-
-      // 위치기반 약국 정보 불러오기
-      const {
-        data: { stores }
-      } = await maskInfo.storesByGeo(latitude, longitude);
-      setStore(stores);
-
-      //map.setCenter(options.center);
-    };
-    init2();
+    const { latitude, longitude } = position;
+    let container = document.getElementById("map"),
+      options = {
+        center: new window.kakao.maps.LatLng(latitude, longitude),
+        level: 3
+      };
+    const map = new window.kakao.maps.Map(container, options);
+    setMymap(map);
   }, [position]);
 
-  //약국 정보가 업데이트 되면 업데이트!
+  // setting marker
+  useEffect(() => {
+    const { latitude, longitude } = position;
+
+    // show Current Location
+    const markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
+      marker = new window.kakao.maps.Marker({
+        position: markerPosition
+      });
+    marker.setMap(map);
+    //map.setCenter(options.center);
+  }, [position, map]);
+
   useEffect(() => {
     if (stores != null) {
       stores.map(data => {
-        const { lat, lng, name, remain_stat, stock_at } = data;
-        CreateInfo(map, lat, lng, { name, remain_stat, stock_at });
+        const { lat, lng, name, remain_stat } = data;
+        const storemarker = CreateInfo(map, lat, lng, {
+          name,
+          remain_stat
+        });
+
+        storemarker.setMap(map);
+        storeMarkers.push(storemarker);
       });
     }
-  }, [stores]);
+  }, [stores, map]);
+
+  useEffect(() => {
+    if (stores && storeMarkers.length > 0) {
+      stores.map((data, idx) => {
+        !isStock
+          ? storeMarkers[idx].setMap(map)
+          : data.remain_stat !== "break" && data.remain_stat !== "empty"
+          ? storeMarkers[idx].setMap(map)
+          : storeMarkers[idx].setMap(null);
+      });
+    }
+  }, [isStock, map, stores]);
 
   return (
     <div>
+      <Toolbar
+        isStock={isStock}
+        onClick={() => {
+          setStock(isStock ? false : true);
+        }}
+      >
+        재고있음
+      </Toolbar>
       <Column>
         <div>약국명칭</div>
         <div>입고시간</div>
@@ -87,16 +124,11 @@ const SetMap = () => {
       </Column>
       <Wrap>
         <DisplayList>
-          {stores
-            ? stores.map(data => (
-                <Display
-                  key={data.name}
-                  name={data.name}
-                  remain_stat={data.remain_stat}
-                  stock_at={data.stock_at}
-                ></Display>
-              ))
-            : "Load"}
+          {!stores ? (
+            "Load"
+          ) : (
+            <Display stores={stores} isStock={isStock}></Display>
+          )}
         </DisplayList>
       </Wrap>
     </div>

@@ -2,7 +2,7 @@ export const CreateInfo = (
   map,
   latitude,
   longitude,
-  { name, stock_at, remain_stat }
+  { name, remain_stat, isStock }
 ) => {
   const color =
     remain_stat === "plenty"
@@ -35,11 +35,13 @@ export const CreateInfo = (
     iwPosition = new window.daum.maps.LatLng(latitude, longitude);
 
   // create info Window
-  new window.kakao.maps.CustomOverlay({
-    map: map,
+  return new window.kakao.maps.CustomOverlay({
     position: iwPosition,
     content: content,
     removable: iwRemoveable
   });
+  //   console.log(isStock);
+  //   isStock ? custom.setMap(null) : custom.setMap(map);
+
   //infowindow.open(map);
 };
