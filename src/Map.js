@@ -56,6 +56,7 @@ const Updated = styled.div`
 const storeMarkers = [];
 const SetMap = () => {
   const [map, setMymap] = useState(null);
+  const [marker, setMarker] = useState(null);
   const [stores, setStore] = useState(null);
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [isStock, setStock] = useState(false);
@@ -85,6 +86,9 @@ const SetMap = () => {
         const maps = new window.kakao.maps.Map(container, options);
         setMymap(maps);
       }
+      if (marker) {
+        marker.setMap(null);
+      }
     };
     init();
   }, [toggle]);
@@ -106,11 +110,12 @@ const SetMap = () => {
     const { latitude, longitude } = position;
 
     // show Current Location
-    const markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
-      marker = new window.kakao.maps.Marker({
-        position: markerPosition
-      });
-    marker.setMap(map);
+    const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+    const markers = new window.kakao.maps.Marker({
+      position: markerPosition
+    });
+    markers.setMap(map);
+    setMarker(markers);
     //map.setCenter(options.center);
   }, [position, map]);
 
