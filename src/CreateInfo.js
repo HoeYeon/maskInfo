@@ -14,7 +14,7 @@ export const CreateInfo = (
       : remain_stat === "empty"
       ? "#95a5a6"
       : "#2c3e50";
-      
+
   const content = `
       <div style="padding:5px; font-size:10px; background-color:#ffffff"><strong>${name}</strong>&nbsp
       <span style = "color:${color}"><br>
@@ -35,8 +35,8 @@ export const CreateInfo = (
     iwPosition = new window.daum.maps.LatLng(latitude, longitude);
 
   // create info Window
-  const infowindow = new window.kakao.maps.CustomOverlay({
-    map:map,
+  new window.kakao.maps.CustomOverlay({
+    map: map,
     position: iwPosition,
     content: content,
     removable: iwRemoveable

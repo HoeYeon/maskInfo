@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import Main from "./Main";
+import React from "react";
 import Map from "./Map";
 function App() {
   return (

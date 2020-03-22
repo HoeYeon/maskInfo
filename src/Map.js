@@ -24,42 +24,59 @@ const Column = styled.div`
 `;
 
 const SetMap = () => {
-  const [stores, setStore] = useState([]);
+  const [map, setMymap] = useState(null);
+  const [stores, setStore] = useState(null);
+  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+
+  // 위치정보 불러오기
   useEffect(() => {
-    const tmp = async () => {
+    const init = async () => {
       const {
         coords: { latitude, longitude }
       } = await GetPosition();
-      console.log(latitude, longitude);
+      setPosition({ latitude, longitude });
+    };
+    init();
+  }, []);
+
+  useEffect(() => {
+    const init2 = async () => {
+      const { latitude, longitude } = position;
       let container = document.getElementById("map"),
         options = {
           center: new window.kakao.maps.LatLng(latitude, longitude),
           level: 3
         };
-      const map = new window.kakao.maps.Map(container, options),
-        // show Current Location
-        markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
+      const map = new window.kakao.maps.Map(container, options);
+      setMymap(map);
+
+      // show Current Location
+      const markerPosition = new window.kakao.maps.LatLng(latitude, longitude),
         marker = new window.kakao.maps.Marker({
           position: markerPosition
         });
       marker.setMap(map);
 
+      // 위치기반 약국 정보 불러오기
       const {
         data: { stores }
       } = await maskInfo.storesByGeo(latitude, longitude);
-      console.log(stores);
-      await stores.map(data => {
+      setStore(stores);
+
+      //map.setCenter(options.center);
+    };
+    init2();
+  }, [position]);
+
+  //약국 정보가 업데이트 되면 업데이트!
+  useEffect(() => {
+    if (stores != null) {
+      stores.map(data => {
         const { lat, lng, name, remain_stat, stock_at } = data;
         CreateInfo(map, lat, lng, { name, remain_stat, stock_at });
       });
-
-      map.setCenter(options.center);
-      setStore(stores);
-    };
-    tmp();
-  }, []);
-
-  console.log(stores);
+    }
+  }, [stores]);
 
   return (
     <div>
@@ -70,14 +87,16 @@ const SetMap = () => {
       </Column>
       <Wrap>
         <DisplayList>
-          {stores.map(data => (
-            <Display
-              key={data.name}
-              name={data.name}
-              remain_stat={data.remain_stat}
-              stock_at={data.stock_at}
-            ></Display>
-          ))}
+          {stores
+            ? stores.map(data => (
+                <Display
+                  key={data.name}
+                  name={data.name}
+                  remain_stat={data.remain_stat}
+                  stock_at={data.stock_at}
+                ></Display>
+              ))
+            : "Load"}
         </DisplayList>
       </Wrap>
     </div>
