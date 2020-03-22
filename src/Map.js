@@ -99,7 +99,9 @@ const SetMap = () => {
       stores.map((data, idx) => {
         !isStock
           ? storeMarkers[idx].setMap(map)
-          : data.remain_stat !== "break" && data.remain_stat !== "empty"
+          : data.remain_stat &&
+            data.remain_stat !== "break" &&
+            data.remain_stat !== "empty"
           ? storeMarkers[idx].setMap(map)
           : storeMarkers[idx].setMap(null);
       });

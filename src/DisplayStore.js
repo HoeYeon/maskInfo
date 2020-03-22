@@ -27,9 +27,13 @@ const Remain = styled.div`
 export default ({ stores, isStock }) => {
   const store = isStock
     ? stores.filter(
-        data => data.remain_stat !== "break" && data.remain_stat !== "empty"
+        data =>
+          data.remain_stat &&
+          data.remain_stat !== "break" &&
+          data.remain_stat !== "empty"
       )
     : stores;
+  console.log("filterd store", store);
   return store.length > 0
     ? store.map(data => (
         <StoreList key={data.code}>

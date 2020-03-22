@@ -25,7 +25,7 @@ export const maskInfo = {
       params: {
         lat: lat,
         lng: lng,
-        m: 1500
+        m: 2000
       }
     }),
   storesByAddr: () =>
