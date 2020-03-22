@@ -60,6 +60,7 @@ const SetMap = () => {
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [isStock, setStock] = useState(false);
   const [lastUpdated, setLast] = useState(null);
+  const [toggle, setToggle] = useState(true);
   // Set Loc & get Drug
   useEffect(() => {
     const init = async () => {
@@ -72,21 +73,29 @@ const SetMap = () => {
       } = await maskInfo.storesByGeo(latitude, longitude);
       setStore(stores);
       stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
+      //   const { latitude, longitude } = position;
+      let container = document.getElementById("map"),
+        options = {
+          center: new window.kakao.maps.LatLng(latitude, longitude),
+          level: 4
+        };
+      const map = new window.kakao.maps.Map(container, options);
+      setMymap(map);
     };
     init();
-  }, []);
+  }, [toggle]);
 
   //set Map
-  useEffect(() => {
-    const { latitude, longitude } = position;
-    let container = document.getElementById("map"),
-      options = {
-        center: new window.kakao.maps.LatLng(latitude, longitude),
-        level: 4
-      };
-    const map = new window.kakao.maps.Map(container, options);
-    setMymap(map);
-  }, [position]);
+  //   useEffect(() => {
+  //     const { latitude, longitude } = position;
+  //     let container = document.getElementById("map"),
+  //       options = {
+  //         center: new window.kakao.maps.LatLng(latitude, longitude),
+  //         level: 4
+  //       };
+  //     const map = new window.kakao.maps.Map(container, options);
+  //     setMymap(map);
+  //   }, [position]);
 
   // setting marker
   useEffect(() => {
@@ -145,9 +154,7 @@ const SetMap = () => {
       </Toolbar>
       <InitLoc
         onClick={() => {
-          const { latitude, longitude } = position;
-          const center = new window.kakao.maps.LatLng(latitude, longitude);
-          map.panTo(center);
+          setToggle(!toggle);
         }}
       >
         내위치

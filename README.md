@@ -11,8 +11,9 @@ Here is [Demo](https://pensive-agnesi-4c07cc.netlify.com/) (Mobile Recommended!!
 - [x] add Mark
 - [x] Show mask on the Map
 - [x] Add list of Drug Store
-- [ ] Filtering with location & remain_stock
-- [ ] Update Info
+- [x] Filtering with location & remain_stock
+- [x] Update Info
+- [x] Move to clicked store
 
 ### Api
 
