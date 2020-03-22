@@ -3,7 +3,6 @@ import GetPosition from "./Getloc";
 import { CreateInfo } from "./CreateInfo";
 import { maskInfo } from "./api";
 import Display from "./DisplayStore";
-import { Filter } from "./Filter";
 import styled from "styled-components";
 
 const Wrap = styled.div`
@@ -26,12 +25,12 @@ const Column = styled.div`
 const Toolbar = styled.button`
   position: fixed;
   z-index: 9999;
-  right: 50px;
-  bottom: 270px;
+  right: 10%;
+  bottom: 38%;
   padding: 5px 7px 5px 7px;
   font-size: 15px;
   font-weight: bold;
-  background-color: ${props => (props.isStock ? "#ffeaa7" : "#dfe6e9")};
+  background-color: ${props => (props.isStock ? "#ffeaa7" : "#ffffff")};
 `;
 const storeMarkers = [];
 const SetMap = () => {
