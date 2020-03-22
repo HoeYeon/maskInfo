@@ -18,6 +18,7 @@ const DisplayList = styled.div`
 const Column = styled.div`
   padding-left: 10px;
   padding-bottom: 5px;
+  padding-right: 20px;
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   font-weight: bold;
@@ -25,12 +26,19 @@ const Column = styled.div`
 const Toolbar = styled.button`
   position: fixed;
   z-index: 9999;
-  right: 10%;
-  bottom: 38%;
+  right: 9%;
+  bottom: 36%;
   padding: 5px 7px 5px 7px;
   font-size: 15px;
   font-weight: bold;
   background-color: ${props => (props.isStock ? "#ffeaa7" : "#ffffff")};
+  border-radius: 15px;
+`;
+const Updated = styled.div`
+  position: fixed;
+  right: 3%;
+  top: 1.5%;
+  font-weight: bold;
 `;
 const storeMarkers = [];
 const SetMap = () => {
@@ -38,7 +46,7 @@ const SetMap = () => {
   const [stores, setStore] = useState(null);
   const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
   const [isStock, setStock] = useState(false);
-
+  const [lastUpdated, setLast] = useState(null);
   // Set Loc & get Drug
   useEffect(() => {
     const init = async () => {
@@ -50,6 +58,7 @@ const SetMap = () => {
         data: { stores }
       } = await maskInfo.storesByGeo(latitude, longitude);
       setStore(stores);
+      stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
     };
     init();
   }, []);
@@ -110,6 +119,10 @@ const SetMap = () => {
 
   return (
     <div>
+      <Updated>
+        업데이트:{" "}
+        {lastUpdated ? lastUpdated.slice(5, lastUpdated.length) : null}
+      </Updated>
       <Toolbar
         isStock={isStock}
         onClick={() => {

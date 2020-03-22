@@ -11,7 +11,8 @@ function App() {
         style={{
           width: "90vw",
           height: "60vh",
-          margin: "10px"
+          margin: "10px",
+          borderRadius: "10px"
         }}
       />
       <Map></Map>

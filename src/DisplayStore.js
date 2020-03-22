@@ -33,7 +33,6 @@ export default ({ stores, isStock }) => {
           data.remain_stat !== "empty"
       )
     : stores;
-  console.log("filterd store", store);
   return store.length > 0
     ? store.map(data => (
         <StoreList key={data.code}>
