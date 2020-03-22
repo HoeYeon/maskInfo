@@ -81,17 +81,14 @@ const SetMap = () => {
           level: 4
         };
       if (map) {
-        map.setCenter(options.center);
+        map.panTo(options.center);
       } else {
         const maps = new window.kakao.maps.Map(container, options);
         setMymap(maps);
       }
-      if (marker) {
-        marker.setMap(null);
-      }
     };
     init();
-  }, [toggle]);
+  }, [toggle, map]);
 
   //set Map
   //   useEffect(() => {
@@ -164,6 +161,7 @@ const SetMap = () => {
       <InitLoc
         onClick={() => {
           setToggle(!toggle);
+          marker.setMap(null);
         }}
       >
         내위치
