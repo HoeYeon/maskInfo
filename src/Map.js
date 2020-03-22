@@ -74,13 +74,17 @@ const SetMap = () => {
       setStore(stores);
       stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
       //   const { latitude, longitude } = position;
-      let container = document.getElementById("map"),
+      const container = document.getElementById("map"),
         options = {
           center: new window.kakao.maps.LatLng(latitude, longitude),
           level: 4
         };
-      const map = new window.kakao.maps.Map(container, options);
-      setMymap(map);
+      if (map) {
+        map.setCenter(options.center);
+      } else {
+        const maps = new window.kakao.maps.Map(container, options);
+        setMymap(maps);
+      }
     };
     init();
   }, [toggle]);
