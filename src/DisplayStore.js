@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StoreList = styled.div`
   justify-content: left;
-  font-size: 14px;
+  font-size: 17px;
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   padding-bottom: 5px;
@@ -24,7 +24,7 @@ const Remain = styled.div`
       : "#2c3e50"};
 `;
 
-export default ({ stores, isStock }) => {
+export default ({ stores, isStock, map }) => {
   const store = isStock
     ? stores.filter(
         data =>
@@ -35,7 +35,13 @@ export default ({ stores, isStock }) => {
     : stores;
   return store.length > 0
     ? store.map(data => (
-        <StoreList key={data.code}>
+        <StoreList
+          key={data.code}
+          onClick={() => {
+            const center = new window.kakao.maps.LatLng(data.lat, data.lng);
+            map.panTo(center);
+          }}
+        >
           <Store>{data.name}</Store>
           <Stock>
             {data.stock_at

@@ -35,10 +35,22 @@ const Toolbar = styled.button`
   border-radius: 15px;
   outline: none;
 `;
+const InitLoc = styled.button`
+  position: fixed;
+  z-index: 9999;
+  right: 9%;
+  bottom: 42%;
+  padding: 5px 7px 5px 7px;
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 15px;
+  outline: none;
+`;
 const Updated = styled.div`
   position: fixed;
   right: 3%;
-  top: 1.5%;
+  top: 1.2%;
   font-weight: bold;
 `;
 const storeMarkers = [];
@@ -70,7 +82,7 @@ const SetMap = () => {
     let container = document.getElementById("map"),
       options = {
         center: new window.kakao.maps.LatLng(latitude, longitude),
-        level: 3
+        level: 4
       };
     const map = new window.kakao.maps.Map(container, options);
     setMymap(map);
@@ -98,7 +110,6 @@ const SetMap = () => {
           remain_stat
         });
 
-        storemarker.setMap(map);
         storeMarkers.push(storemarker);
       });
     }
@@ -132,6 +143,15 @@ const SetMap = () => {
       >
         재고있음
       </Toolbar>
+      <InitLoc
+        onClick={() => {
+          const { latitude, longitude } = position;
+          const center = new window.kakao.maps.LatLng(latitude, longitude);
+          map.panTo(center);
+        }}
+      >
+        내위치
+      </InitLoc>
       <Column>
         <div>약국명칭</div>
         <div>입고시간</div>
@@ -142,7 +162,7 @@ const SetMap = () => {
           {!stores ? (
             "Load"
           ) : (
-            <Display stores={stores} isStock={isStock}></Display>
+            <Display stores={stores} isStock={isStock} map={map}></Display>
           )}
         </DisplayList>
       </Wrap>
