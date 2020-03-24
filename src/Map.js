@@ -69,7 +69,6 @@ const SetMap = () => {
         storeMarkers[idx].setMap(null);
       });
     }
-    if (marker) marker.setMap(null);
   };
   // Set Loc & get Drug
   useEffect(() => {
@@ -100,18 +99,6 @@ const SetMap = () => {
     init();
   }, [toggle, map]);
 
-  //set Map
-  //   useEffect(() => {
-  //     const { latitude, longitude } = position;
-  //     let container = document.getElementById("map"),
-  //       options = {
-  //         center: new window.kakao.maps.LatLng(latitude, longitude),
-  //         level: 4
-  //       };
-  //     const map = new window.kakao.maps.Map(container, options);
-  //     setMymap(map);
-  //   }, [position]);
-
   // setting marker
   useEffect(() => {
     const { latitude, longitude } = position;
@@ -121,7 +108,8 @@ const SetMap = () => {
     const markers = new window.kakao.maps.Marker({
       position: markerPosition
     });
-    if (marker) marker.setMap(map);
+    if (marker) marker.setMap(null);
+    markers.setMap(map);
     setMarker(markers);
   }, [position, map]);
 
