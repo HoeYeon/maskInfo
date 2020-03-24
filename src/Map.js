@@ -62,9 +62,19 @@ const SetMap = () => {
   const [isStock, setStock] = useState(false);
   const [lastUpdated, setLast] = useState(null);
   const [toggle, setToggle] = useState(true);
+
+  const clearMap = () => {
+    if (stores && storeMarkers.length > 0) {
+      stores.map((data, idx) => {
+        storeMarkers[idx].setMap(null);
+      });
+      setMarker(null);
+    }
+  };
   // Set Loc & get Drug
   useEffect(() => {
     const init = async () => {
+      clearMap();
       const {
         coords: { latitude, longitude }
       } = await GetPosition();
