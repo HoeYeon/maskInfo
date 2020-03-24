@@ -68,8 +68,8 @@ const SetMap = () => {
       stores.map((data, idx) => {
         storeMarkers[idx].setMap(null);
       });
-      setMarker(null);
     }
+    if (marker) marker.setMap(null);
   };
   // Set Loc & get Drug
   useEffect(() => {
@@ -84,7 +84,7 @@ const SetMap = () => {
       } = await maskInfo.storesByGeo(latitude, longitude);
       setStore(stores);
       stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
-      //   const { latitude, longitude } = position;
+
       const container = document.getElementById("map"),
         options = {
           center: new window.kakao.maps.LatLng(latitude, longitude),
@@ -121,9 +121,8 @@ const SetMap = () => {
     const markers = new window.kakao.maps.Marker({
       position: markerPosition
     });
-    markers.setMap(map);
+    if (marker) marker.setMap(map);
     setMarker(markers);
-    //map.setCenter(options.center);
   }, [position, map]);
 
   useEffect(() => {
@@ -171,7 +170,6 @@ const SetMap = () => {
       <InitLoc
         onClick={() => {
           setToggle(!toggle);
-          marker.setMap(null);
         }}
       >
         내위치
