@@ -19,8 +19,6 @@ const Remain = styled.div`
       ? "#f1c40f"
       : props.remain_stat === "few"
       ? "#c0392b"
-      : props.remain_stat === "empty"
-      ? "#95a5a6"
       : "#95a5a6"};
 `;
 
@@ -55,8 +53,6 @@ export default ({ stores, isStock, map }) => {
               ? "30~100"
               : data.remain_stat === "few"
               ? "2~30"
-              : data.remain_stat === "empty"
-              ? "재고없음"
               : "재고없음"}
           </Remain>
         </StoreList>

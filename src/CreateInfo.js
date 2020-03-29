@@ -25,9 +25,7 @@ export const CreateInfo = (
           ? "30~100"
           : remain_stat === "few"
           ? "2~30"
-          : remain_stat === "empty"
-          ? "재고없음"
-          : "판매중지"
+          : "재고없음"
       }</span>
       </div>
       `;
