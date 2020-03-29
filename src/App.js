@@ -10,9 +10,11 @@ function App() {
         id="map"
         style={{
           width: "90vw",
-          height: "60vh",
-          margin: "10px",
-          borderRadius: "10px"
+          height: "55vh",
+          margin: "1em 1em 1em 1em",
+          borderRadius: "10px",
+          border: "1px solid #57606f",
+          boxShadow: "1px 1px"
         }}
       />
       <Map></Map>

@@ -21,7 +21,7 @@ const Remain = styled.div`
       ? "#c0392b"
       : props.remain_stat === "empty"
       ? "#95a5a6"
-      : "#2c3e50"};
+      : "#95a5a6"};
 `;
 
 export default ({ stores, isStock, map }) => {
@@ -57,7 +57,7 @@ export default ({ stores, isStock, map }) => {
               ? "2~30"
               : data.remain_stat === "empty"
               ? "재고없음"
-              : "판매중지"}
+              : "재고없음"}
           </Remain>
         </StoreList>
       ))

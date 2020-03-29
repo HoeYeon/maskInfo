@@ -5,29 +5,36 @@ import { maskInfo } from "./api";
 import Display from "./DisplayStore";
 import styled from "styled-components";
 
-const Wrap = styled.div`
+const DisplayWrapper = styled.div`
   position: relative;
+  margin-left: 5px;
 `;
 const DisplayList = styled.div`
   position: fixed;
   width: 90vw;
   overflow: auto;
-  height: 26%;
-  padding-left: 10px;
+  height: 30%;
+  margin-top: 3px;
+  margin-left: 10px;
+  padding-left: 8px;
 `;
 const Column = styled.div`
-  padding-left: 10px;
+  margin-left: 10px;
   padding-bottom: 5px;
-  padding-right: 20px;
+  padding-right: 12px;
+  padding-left: 8px;
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
+  grid-template-columns: 2fr 2fr 0.8fr;
+  width: 90%;
   font-weight: bold;
+  background-color: #dfe4ea;
+  box-shadow: 1.5px 1.5px;
 `;
 const Toolbar = styled.button`
   position: fixed;
   z-index: 9999;
   right: 9%;
-  bottom: 36%;
+  bottom: 41%;
   padding: 5px 7px 5px 7px;
   font-size: 15px;
   font-weight: bold;
@@ -39,7 +46,7 @@ const InitLoc = styled.button`
   position: fixed;
   z-index: 9999;
   right: 9%;
-  bottom: 42%;
+  bottom: 46%;
   padding: 5px 7px 5px 7px;
   font-size: 15px;
   font-weight: bold;
@@ -162,12 +169,12 @@ const SetMap = () => {
       >
         내위치
       </InitLoc>
-      <Column>
-        <div>약국명칭</div>
-        <div>입고시간</div>
-        <div>재고현황</div>
-      </Column>
-      <Wrap>
+      <DisplayWrapper>
+        <Column>
+          <div>약국명칭</div>
+          <div>입고시간</div>
+          <div>재고현황</div>
+        </Column>
         <DisplayList>
           {!stores ? (
             "Load"
@@ -175,7 +182,7 @@ const SetMap = () => {
             <Display stores={stores} isStock={isStock} map={map}></Display>
           )}
         </DisplayList>
-      </Wrap>
+      </DisplayWrapper>
     </div>
   );
 };
