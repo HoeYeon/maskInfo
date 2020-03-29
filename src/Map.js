@@ -47,7 +47,7 @@ const InitLoc = styled.button`
   position: fixed;
   z-index: 9999;
   right: 9%;
-  bottom: 52%;
+  bottom: 52.5%;
   padding: 5px 7px 5px 7px;
   font-size: 0.9em;
   font-weight: bold;
