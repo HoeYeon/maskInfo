@@ -10,8 +10,8 @@ function App() {
         id="map"
         style={{
           width: "90vw",
-          height: "55vh",
-          margin: "1em 1em 1em 1em",
+          height: "50vh",
+          margin: "1em 1em 1.5em 0.8em",
           borderRadius: "10px",
           border: "1px solid #57606f",
           boxShadow: "1px 1px"
