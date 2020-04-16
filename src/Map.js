@@ -82,26 +82,33 @@ const SetMap = () => {
   useEffect(() => {
     const init = async () => {
       clearMap();
-      const {
-        coords: { latitude, longitude }
-      } = await GetPosition();
-      setPosition({ latitude, longitude });
-      let {
-        data: { stores }
-      } = await maskInfo.storesByGeo(latitude, longitude);
-      setStore(stores);
-      stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
+      try {
+        const {
+          coords: { latitude, longitude }
+        } = await GetPosition();
+        setPosition({ latitude, longitude });
+        let {
+          data: { stores }
+        } = await maskInfo.storesByGeo(latitude, longitude);
+        setStore(stores);
+        stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
 
-      const container = document.getElementById("map"),
-        options = {
-          center: new window.kakao.maps.LatLng(latitude, longitude),
-          level: 4
-        };
-      if (map) {
-        map.panTo(options.center);
-      } else {
-        const maps = new window.kakao.maps.Map(container, options);
-        setMymap(maps);
+        const container = document.getElementById("map"),
+          options = {
+            center: new window.kakao.maps.LatLng(latitude, longitude),
+            level: 4
+          };
+        if (map) {
+          map.panTo(options.center);
+        } else {
+          const maps = new window.kakao.maps.Map(container, options);
+          setMymap(maps);
+        }
+      } catch {
+        alert("GPS를 켜주세요!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       }
     };
     init();
