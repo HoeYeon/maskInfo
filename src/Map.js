@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GetPosition from "./Getloc";
 import { CreateInfo } from "./CreateInfo";
 import { maskInfo } from "./api";
-import Display from "./DisplayStore";
+import Display, { sortingStore } from "./DisplayStore";
 import styled from "styled-components";
 
 const DisplayWrapper = styled.div`
@@ -114,7 +114,7 @@ const SetMap = () => {
     init();
   }, [toggle, map]);
 
-  // setting marker
+  // setting current loc marker
   useEffect(() => {
     const { latitude, longitude } = position;
 
@@ -128,6 +128,7 @@ const SetMap = () => {
     setMarker(markers);
   }, [position, map]);
 
+  //get store info
   useEffect(() => {
     if (stores != null) {
       stores.map(data => {
@@ -142,6 +143,7 @@ const SetMap = () => {
     }
   }, [stores, map]);
 
+  //mark store at map
   useEffect(() => {
     if (stores && storeMarkers.length > 0) {
       stores.map((data, idx) => {
@@ -187,7 +189,11 @@ const SetMap = () => {
           {!stores ? (
             "Load"
           ) : (
-            <Display stores={stores} isStock={isStock} map={map}></Display>
+            <Display
+              stores={sortingStore(stores, position)}
+              isStock={isStock}
+              map={map}
+            ></Display>
           )}
         </DisplayList>
       </DisplayWrapper>

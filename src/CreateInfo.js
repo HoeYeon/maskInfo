@@ -38,8 +38,4 @@ export const CreateInfo = (
     content: content,
     removable: iwRemoveable
   });
-  //   console.log(isStock);
-  //   isStock ? custom.setMap(null) : custom.setMap(map);
-
-  //infowindow.open(map);
 };
