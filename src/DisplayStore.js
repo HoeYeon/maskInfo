@@ -24,17 +24,21 @@ const Remain = styled.div`
 
 export const sortingStore = (stores, curLoc) => {
   const { latitude, longitude } = curLoc;
-  stores.sort((a, b) => {
-    const cmp = a =>
-      Math.sqrt(Math.pow(latitude - a.lat, 2) + Math.pow(longitude - a.lng, 2));
-    if (cmp(a) < cmp(b)) {
-      return -1;
-    }
-    if (cmp(a) > cmp(b)) {
-      return 1;
-    }
-    return 0;
-  });
+  if (stores) {
+    stores.sort((a, b) => {
+      const cmp = a =>
+        Math.sqrt(
+          Math.pow(latitude - a.lat, 2) + Math.pow(longitude - a.lng, 2)
+        );
+      if (cmp(a) < cmp(b)) {
+        return -1;
+      }
+      if (cmp(a) > cmp(b)) {
+        return 1;
+      }
+      return 0;
+    });
+  }
   return stores;
 };
 

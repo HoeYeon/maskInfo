@@ -12,11 +12,11 @@ export const CreateInfo = (
       : remain_stat === "few"
       ? "#c0392b"
       : remain_stat === "empty"
-      ? "#95a5a6"
+      ? "#2c3e50"
       : "#2c3e50";
 
   const content = `
-      <div style="padding:5px; font-size:10px; background-color:#ffffff"><strong>${name}</strong>&nbsp
+      <div style="padding:5px; font-size:10px; background-color:#ffffff;"><strong>${name}</strong>&nbsp
       <span style = "color:${color}"><br>
       ${
         remain_stat === "plenty"

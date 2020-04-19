@@ -71,15 +71,13 @@ const SetMap = () => {
   const [lastUpdated, setLast] = useState(null);
   const [toggle, setToggle] = useState(true);
 
-  const clearMap = () => {
-    if (stores && storeMarkers.length > 0) {
-      stores.map((data, idx) => {
-        storeMarkers[idx].setMap(null);
-      });
-    }
-  };
   // Set Loc & get Drug
   useEffect(() => {
+    const clearMap = () => {
+      if (stores && storeMarkers.length > 0) {
+        stores.map((data, idx) => storeMarkers[idx].setMap(null));
+      }
+    };
     const init = async () => {
       clearMap();
       try {
@@ -90,7 +88,8 @@ const SetMap = () => {
         let {
           data: { stores }
         } = await maskInfo.storesByGeo(latitude, longitude);
-        setStore(stores);
+
+        setStore(sortingStore(stores, position));
         stores.length > 0 ? setLast(stores[0].created_at) : setLast(null);
 
         const container = document.getElementById("map"),
@@ -137,8 +136,8 @@ const SetMap = () => {
           name,
           remain_stat
         });
-
         storeMarkers.push(storemarker);
+        return "";
       });
     }
   }, [stores, map]);
@@ -146,15 +145,15 @@ const SetMap = () => {
   //mark store at map
   useEffect(() => {
     if (stores && storeMarkers.length > 0) {
-      stores.map((data, idx) => {
+      stores.map((data, idx) =>
         !isStock
           ? storeMarkers[idx].setMap(map)
           : data.remain_stat &&
             data.remain_stat !== "break" &&
             data.remain_stat !== "empty"
           ? storeMarkers[idx].setMap(map)
-          : storeMarkers[idx].setMap(null);
-      });
+          : storeMarkers[idx].setMap(null)
+      );
     }
   }, [isStock, map, stores]);
 
