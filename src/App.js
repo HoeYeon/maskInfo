@@ -1,5 +1,5 @@
 import React from "react";
-import Map from "./Map";
+import Map from "./MapContainer";
 function App() {
   return (
     <>
@@ -14,7 +14,7 @@ function App() {
           margin: "1em 1em 1.5em 0.8em",
           borderRadius: "10px",
           border: "1px solid #57606f",
-          boxShadow: "1px 1px"
+          boxShadow: "1px 1px",
         }}
       />
       <Map></Map>
