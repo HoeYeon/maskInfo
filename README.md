@@ -2,7 +2,9 @@
 
 ### 근처 약국, 재고현황, 입고시간 등 정보를 제공
 
-Here is [Demo](https://pensive-agnesi-4c07cc.netlify.com/) (Mobile Recommended!!)
+Here is [Demo](https://pensive-agnesi-4c07cc.netlify.com/) (Mobile Recommended!!) (API 지원이 중단됐습니다.)
+
+![main_image](./public/mask.jpg)
 
 ### Develop
 
